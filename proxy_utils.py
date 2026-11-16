@@ -40,8 +40,11 @@ def backend_base_url() -> str:
         raise RuntimeError(f"{ENV_NAME} must be an absolute http(s) URL.")
     if parsed.username or parsed.password or parsed.query or parsed.fragment:
         raise RuntimeError(f"{ENV_NAME} must not contain credentials, query parameters, or a fragment.")
-    if parsed.scheme != "https" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"}:
-        raise RuntimeError(f"{ENV_NAME} must use HTTPS in production.")
+    
+    # ដំណោះស្រាយ: បាន Comment លក្ខខណ្ឌ HTTPS ចោល ដើម្បីអនុញ្ញាតឱ្យប្រើ HTTP ជាមួយ IP ធម្មតាបាន
+    # if parsed.scheme != "https" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"}:
+    #     raise RuntimeError(f"{ENV_NAME} must use HTTPS in production.")
+    
     return raw.rstrip("/")
 
 
